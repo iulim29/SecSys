@@ -87,9 +87,7 @@ backend/
 - Custom-trained YOLO model on 8,000+ person images  
 - Excellent precision under good lighting conditions  
 
-## 📸 Example Snapshots
 
-_(Add example images here if desired)_
 
 ## 📚 References
 
