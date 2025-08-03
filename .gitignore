@@ -1,0 +1,29 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment and secrets
+.env
+*.json  # e.g., Firebase service account keys
+
+# Model weights
+*.pt
+
+# Flask runtime
+*.log
+instance/
+
+
+
+# VS Code / IDE settings
+.vscode/
+*.code-workspace
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db

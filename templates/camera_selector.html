@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Camera</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h2 {
+      color: #00ff99;
+      margin-bottom: 30px;
+    }
+
+    .camera-btn {
+      padding: 20px 50px;
+      font-size: 22px;
+      margin: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #222;
+      color: #00ff99;
+      box-shadow: 0 0 8px rgba(0, 255, 153, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .camera-btn:hover {
+      background-color: #00ff99;
+      color: #000;
+    }
+
+    .active {
+      animation: blink 1s infinite;
+      background-color: #ff4444 !important;
+      color: white !important;
+      box-shadow: 0 0 12px rgba(255, 69, 69, 0.6);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .footer-links {
+      margin-top: 30px;
+    }
+
+    .footer-links a {
+      color: #00ff99;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <script>
+    function updateStatus() {
+      fetch('/api/status')
+        .then(res => res.json())
+        .then(data => {
+          Object.keys(data).forEach(cam => {
+            const btn = document.getElementById(cam);
+            if (!btn) return;
+
+            if (data[cam].active) {
+              btn.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+            }
+          });
+        })
+        .catch(err => console.error("Status update failed:", err));
+    }
+
+    setInterval(updateStatus, 2000);
+    window.onload = updateStatus;
+  </script>
+
+</head>
+<body>
+
+  <h2>📷 Choose a Camera</h2>
+
+  <div>
+    <a href="/stream?cam=cam1">
+      <button id="cam1" class="camera-btn">Camera 1</button>
+    </a>
+    <a href="/stream?cam=cam2">
+      <button id="cam2" class="camera-btn">Camera 2</button>
+    </a>
+  </div>
+
+  <div class="footer-links">
+    <a href="/alerts">🔔 View Alerts</a>
+    |
+    <a href="/logout">🔓 Log Out</a>
+  </div>
+
+</body>
+</html>
